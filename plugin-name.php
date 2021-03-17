@@ -226,7 +226,9 @@ function testmap($atts){
 		<? endwhile; ?>
 	</div>
 	<div class="map-card-body">
-	<div class="job-total card-title"><h3>Total Completed: <?php echo $count; ?> Jobs in <?=$city?></h3></div>
+	<div class="job-total card-title"><h3>Total Completed: <?php 
+	echo $count;
+	$cityVal=($city==='false')?'Everywhere':$city; ?> Jobs in <?=$cityVal;?></h3></div>
 	<p class="card-text">
       This Map displays all the jobs we have completed in the chicago land area, click on a map marker for more details, click the button within each marker to be taken to a detailed breakdown of the work completed and service provided.
     </p>
