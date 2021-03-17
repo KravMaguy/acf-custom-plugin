@@ -185,7 +185,9 @@ function testmap($atts){
 	 ?>
 	 <div class="map-card" style="box-shadow:0px 0px 10px rgba(0, 0, 0, 0.5);">
 	<div class="acf-map">
-		<?php while ($the_query->have_posts()):
+		<?php 
+		$count=0;
+		while ($the_query->have_posts()):
 		$the_query->the_post(); 
 		$location = get_field('location');
 	    $cityToMatch=strtolower($location['city']);
@@ -193,6 +195,7 @@ function testmap($atts){
         $match=($cityToMatch===$city)?'true':'false';
         array_push($b,$match);
         if($city==='false'){
+			$count++
 		?>
 		<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>">
 		<div class="map-info-window">
@@ -205,7 +208,9 @@ function testmap($atts){
 		Read More</a>
     	</div>
 		</div>
-		<? } elseif($match==="true"){ ?>
+		<? } elseif($match==="true"){ 
+			$count++
+			?>
 				<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>">
 		<div class="map-info-window">
         <h4><?php the_title(); ?></h4>
@@ -221,7 +226,7 @@ function testmap($atts){
 		<? endwhile; ?>
 	</div>
 	<div class="map-card-body">
-	<div class="job-total card-title"><h3>Total Completed: <?php echo sizeof($args); ?> Jobs</h3></div>
+	<div class="job-total card-title"><h3>Total Completed: <?php echo $count; ?> Jobs in <?=$city?></h3></div>
 	<p class="card-text">
       This Map displays all the jobs we have completed in the chicago land area, click on a map marker for more details, click the button within each marker to be taken to a detailed breakdown of the work completed and service provided.
     </p>
