@@ -194,24 +194,10 @@ function testmap($atts){
         array_push($a,$cityToMatch);
         $match=($cityToMatch===$city)?'true':'false';
         array_push($b,$match);
-        if($city==='false'){
+        if($city==='false'||$match==='true'){
 			$count++
 		?>
 		<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>">
-		<div class="map-info-window">
-        <h4><?php the_title(); ?></h4>
-		<div class="map-details">
-        <p class="map-address"><?php echo $location['address']; ?></p>
-		<p class="map-phone"><a href="tel:6309959001">+1 630 995-9001</a></p>
-		</div>
-		<a class="btn-primary map-link" href="<?php the_permalink(); ?>">
-		Read More</a>
-    	</div>
-		</div>
-		<? } elseif($match==="true"){ 
-			$count++
-			?>
-				<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>">
 		<div class="map-info-window">
         <h4><?php the_title(); ?></h4>
 		<div class="map-details">
@@ -228,9 +214,9 @@ function testmap($atts){
 	<div class="map-card-body">
 	<div class="job-total card-title"><h3>Total Completed: <?php 
 	echo $count;
-	$cityVal=($city==='false')?'Everywhere':$city; ?> Jobs in <?=$cityVal;?></h3></div>
+	$cityVal=($city==='false')?'the Chicago Land Area':$city; ?> Job<?=$count===1?'':'s';?> in <?=$cityVal;?></h3></div>
 	<p class="card-text">
-      This Map displays all the jobs we have completed in the chicago land area, click on a map marker for more details, click the button within each marker to be taken to a detailed breakdown of the work completed and service provided.
+      This Map displays all the jobs we have completed in <?=$cityVal ?>, click on a map marker for more details, click the button within each marker to be taken to a detailed breakdown of the work completed and service provided.
     </p>
     <div class="map-footer panel-footer">
         <a class="btn btn-primary btn-panel-services map-link" href="#">
