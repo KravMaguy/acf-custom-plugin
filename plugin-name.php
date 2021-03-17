@@ -84,84 +84,7 @@ run_plugin_name();
 
 add_shortcode('programCount', 'programCountFunction');
 
-function programCountFunction(){
-	$args = array(
-		'numberposts'	=> -1,
-		'post_type'		=> 'jobs',
-	);
-	$the_query = new WP_Query( $args );
-	 if( $the_query->have_posts() ): ?>
-	 <div class="map-card" style="box-shadow:0px 0px 10px rgba(0, 0, 0, 0.5);">
-	<div class="acf-map">
-		<?php while ($the_query->have_posts()):
-		$the_query->the_post(); 
-		$location = get_field('location');
-		?>
-		<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>">
-		<div class="map-info-window">
-        <h4><?php the_title(); ?></h4>
-		<div class="map-details">
-        <p class="map-address"><?php echo $location['address']; ?></p>
-		<p class="map-phone"><a href="tel:6309959001">+1 630 995-9001</a></p>
-		</div>
-		<a class="btn-primary map-link" href="<?php the_permalink(); ?>">
-		Read More</a>
-    	</div>
-		</div>
-		<? endwhile; ?>
-	</div>
-	<div class="map-card-body">
-	<div class="job-total card-title"><h3>Total Completed: <?php echo sizeof($args); ?> Jobs</h3></div>
-	<p class="card-text">
-      This Map displays all the jobs we have completed in the chicago land area, click on a map marker for more details, click the button within each marker to be taken to a detailed breakdown of the work completed and service provided.
-    </p>
-    <div class="map-footer panel-footer">
-        <a class="btn btn-primary btn-panel-services map-link" href="https://srsexteriors.com/all-completed-jobs/">
-		All Jobs</a>   
-    </div>
-	</div>
-	</card>
-	<?php
-	endif;
-	wp_reset_query();
-}
-
-add_shortcode('testLocation', 'testLocFunction');
-
-
-function testLocFunction(){
-	$args = array(
-		'numberposts'	=> -1,
-		'post_type'		=> 'jobs',
-	);
-	$the_query = new WP_Query( $args );
-	 if( $the_query->have_posts() ): ?>
-	<ul>
-		<?php while ($the_query->have_posts()):
-		$the_query->the_post(); ?>
-		<?
-		$values = get_field('location');
-		$city=$values['city'];
-		if ($values)
-		{
-			echo 'the city is: '.$city.'<br/>';
-		}
-	endwhile; ?>
-	</ul>
-	<?php
-	endif;
-	wp_reset_query();
-}
-
-
-
-
-
-
-
-add_shortcode('testmaps', 'testmap');
-
-function testmap($atts){
+function programCountFunction($atts){
     $atts=shortcode_atts(
         array(
             'city'=>'false'
@@ -170,10 +93,7 @@ function testmap($atts){
         );
         
     $city=strtolower($atts['city']);
-    echo $city;
-    
-    // $msgType= (esc_attr($atts['city'])=='true')?'':'';
-	$args = array(
+    	$args = array(
 		'numberposts'	=> -1,
 		'post_type'		=> 'jobs',
 	);
@@ -219,15 +139,15 @@ function testmap($atts){
       This Map displays all the jobs we have completed in <?=$cityVal ?>, click on a map marker for more details, click the button within each marker to be taken to a detailed breakdown of the work completed and service provided.
     </p>
     <div class="map-footer panel-footer">
-        <a class="btn btn-primary btn-panel-services map-link" href="#">
+        <a class="btn btn-primary btn-panel-services map-link" href="https://srsexteriors.com/all-completed-jobs/">
 		All Jobs</a>   
     </div>
 	</div>
 	</card>
 	<?php
-	print_r($a);
-	echo '</br>';
-	print_r($b);
+	// print_r($a);
+	// echo '</br>';
+	// print_r($b);
 	};
 	wp_reset_query();
 }
